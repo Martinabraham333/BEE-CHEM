@@ -11,7 +11,7 @@ class CustomFormTextField extends StatelessWidget {
   final double widthSize;
   final bool? readonly;
   final VoidCallback? ontap;
-  final String Function(String?) validator;
+  final String? Function(String?)? validator;
 
   const CustomFormTextField({
     super.key,

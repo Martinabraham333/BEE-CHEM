@@ -14,30 +14,62 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LoginEvent {
 
-
+ String get email; String get password;
+/// Create a copy of LoginEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoginEventCopyWith<LoginEvent> get copyWith => _$LoginEventCopyWithImpl<LoginEvent>(this as LoginEvent, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginEvent);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginEvent&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,email,password);
 
 @override
 String toString() {
-  return 'LoginEvent()';
+  return 'LoginEvent(email: $email, password: $password)';
 }
 
 
 }
 
 /// @nodoc
-class $LoginEventCopyWith<$Res>  {
-$LoginEventCopyWith(LoginEvent _, $Res Function(LoginEvent) __);
+abstract mixin class $LoginEventCopyWith<$Res>  {
+  factory $LoginEventCopyWith(LoginEvent value, $Res Function(LoginEvent) _then) = _$LoginEventCopyWithImpl;
+@useResult
+$Res call({
+ String email, String password
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoginEventCopyWithImpl<$Res>
+    implements $LoginEventCopyWith<$Res> {
+  _$LoginEventCopyWithImpl(this._self, this._then);
+
+  final LoginEvent _self;
+  final $Res Function(LoginEvent) _then;
+
+/// Create a copy of LoginEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? password = null,}) {
+  return _then(_self.copyWith(
+email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
 }
 
 
@@ -55,11 +87,11 @@ extension LoginEventPatterns on LoginEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Started value)?  started,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Login value)?  login,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Started() when started != null:
-return started(_that);case _:
+case Login() when login != null:
+return login(_that);case _:
   return orElse();
 
 }
@@ -77,11 +109,11 @@ return started(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Started value)  started,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Login value)  login,}){
 final _that = this;
 switch (_that) {
-case _Started():
-return started(_that);case _:
+case Login():
+return login(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -98,11 +130,11 @@ return started(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Started value)?  started,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Login value)?  login,}){
 final _that = this;
 switch (_that) {
-case _Started() when started != null:
-return started(_that);case _:
+case Login() when login != null:
+return login(_that);case _:
   return null;
 
 }
@@ -119,10 +151,10 @@ return started(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String email,  String password)?  login,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Started() when started != null:
-return started();case _:
+case Login() when login != null:
+return login(_that.email,_that.password);case _:
   return orElse();
 
 }
@@ -140,10 +172,10 @@ return started();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String email,  String password)  login,}) {final _that = this;
 switch (_that) {
-case _Started():
-return started();case _:
+case Login():
+return login(_that.email,_that.password);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -160,10 +192,10 @@ return started();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String email,  String password)?  login,}) {final _that = this;
 switch (_that) {
-case _Started() when started != null:
-return started();case _:
+case Login() when login != null:
+return login(_that.email,_that.password);case _:
   return null;
 
 }
@@ -174,62 +206,131 @@ return started();case _:
 /// @nodoc
 
 
-class _Started implements LoginEvent {
-  const _Started();
+class Login implements LoginEvent {
+  const Login({required this.email, required this.password});
   
 
+@override final  String email;
+@override final  String password;
 
-
+/// Create a copy of LoginEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoginCopyWith<Login> get copyWith => _$LoginCopyWithImpl<Login>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Started);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Login&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,email,password);
 
 @override
 String toString() {
-  return 'LoginEvent.started()';
+  return 'LoginEvent.login(email: $email, password: $password)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $LoginCopyWith<$Res> implements $LoginEventCopyWith<$Res> {
+  factory $LoginCopyWith(Login value, $Res Function(Login) _then) = _$LoginCopyWithImpl;
+@override @useResult
+$Res call({
+ String email, String password
+});
 
 
+
+
+}
+/// @nodoc
+class _$LoginCopyWithImpl<$Res>
+    implements $LoginCopyWith<$Res> {
+  _$LoginCopyWithImpl(this._self, this._then);
+
+  final Login _self;
+  final $Res Function(Login) _then;
+
+/// Create a copy of LoginEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,}) {
+  return _then(Login(
+email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 /// @nodoc
 mixin _$LoginState {
 
-
+ List<UserEntity> get userDetails; bool get isLoading; String get msg;
+/// Create a copy of LoginState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoginStateCopyWith<LoginState> get copyWith => _$LoginStateCopyWithImpl<LoginState>(this as LoginState, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginState&&const DeepCollectionEquality().equals(other.userDetails, userDetails)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.msg, msg) || other.msg == msg));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(userDetails),isLoading,msg);
 
 @override
 String toString() {
-  return 'LoginState()';
+  return 'LoginState(userDetails: $userDetails, isLoading: $isLoading, msg: $msg)';
 }
 
 
 }
 
 /// @nodoc
-class $LoginStateCopyWith<$Res>  {
-$LoginStateCopyWith(LoginState _, $Res Function(LoginState) __);
+abstract mixin class $LoginStateCopyWith<$Res>  {
+  factory $LoginStateCopyWith(LoginState value, $Res Function(LoginState) _then) = _$LoginStateCopyWithImpl;
+@useResult
+$Res call({
+ List<UserEntity> userDetails, bool isLoading, String msg
+});
+
+
+
+
+}
+/// @nodoc
+class _$LoginStateCopyWithImpl<$Res>
+    implements $LoginStateCopyWith<$Res> {
+  _$LoginStateCopyWithImpl(this._self, this._then);
+
+  final LoginState _self;
+  final $Res Function(LoginState) _then;
+
+/// Create a copy of LoginState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? userDetails = null,Object? isLoading = null,Object? msg = null,}) {
+  return _then(_self.copyWith(
+userDetails: null == userDetails ? _self.userDetails : userDetails // ignore: cast_nullable_to_non_nullable
+as List<UserEntity>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,msg: null == msg ? _self.msg : msg // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
 }
 
 
@@ -247,11 +348,11 @@ extension LoginStatePatterns on LoginState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _LoginState value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial(_that);case _:
+case _LoginState() when $default != null:
+return $default(_that);case _:
   return orElse();
 
 }
@@ -269,11 +370,11 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,}){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _LoginState value)  $default,){
 final _that = this;
 switch (_that) {
-case _Initial():
-return initial(_that);case _:
+case _LoginState():
+return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -290,11 +391,11 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _LoginState value)?  $default,){
 final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial(_that);case _:
+case _LoginState() when $default != null:
+return $default(_that);case _:
   return null;
 
 }
@@ -311,10 +412,10 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<UserEntity> userDetails,  bool isLoading,  String msg)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial();case _:
+case _LoginState() when $default != null:
+return $default(_that.userDetails,_that.isLoading,_that.msg);case _:
   return orElse();
 
 }
@@ -332,10 +433,10 @@ return initial();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<UserEntity> userDetails,  bool isLoading,  String msg)  $default,) {final _that = this;
 switch (_that) {
-case _Initial():
-return initial();case _:
+case _LoginState():
+return $default(_that.userDetails,_that.isLoading,_that.msg);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -352,10 +453,10 @@ return initial();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<UserEntity> userDetails,  bool isLoading,  String msg)?  $default,) {final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial();case _:
+case _LoginState() when $default != null:
+return $default(_that.userDetails,_that.isLoading,_that.msg);case _:
   return null;
 
 }
@@ -366,33 +467,77 @@ return initial();case _:
 /// @nodoc
 
 
-class _Initial implements LoginState {
-  const _Initial();
+class _LoginState implements LoginState {
+  const _LoginState({final  List<UserEntity> userDetails = const [], this.isLoading = false, this.msg = ''}): _userDetails = userDetails;
   
 
+ final  List<UserEntity> _userDetails;
+@override@JsonKey() List<UserEntity> get userDetails {
+  if (_userDetails is EqualUnmodifiableListView) return _userDetails;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_userDetails);
+}
 
+@override@JsonKey() final  bool isLoading;
+@override@JsonKey() final  String msg;
 
+/// Create a copy of LoginState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$LoginStateCopyWith<_LoginState> get copyWith => __$LoginStateCopyWithImpl<_LoginState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginState&&const DeepCollectionEquality().equals(other._userDetails, _userDetails)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.msg, msg) || other.msg == msg));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_userDetails),isLoading,msg);
 
 @override
 String toString() {
-  return 'LoginState.initial()';
+  return 'LoginState(userDetails: $userDetails, isLoading: $isLoading, msg: $msg)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$LoginStateCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
+  factory _$LoginStateCopyWith(_LoginState value, $Res Function(_LoginState) _then) = __$LoginStateCopyWithImpl;
+@override @useResult
+$Res call({
+ List<UserEntity> userDetails, bool isLoading, String msg
+});
 
 
+
+
+}
+/// @nodoc
+class __$LoginStateCopyWithImpl<$Res>
+    implements _$LoginStateCopyWith<$Res> {
+  __$LoginStateCopyWithImpl(this._self, this._then);
+
+  final _LoginState _self;
+  final $Res Function(_LoginState) _then;
+
+/// Create a copy of LoginState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? userDetails = null,Object? isLoading = null,Object? msg = null,}) {
+  return _then(_LoginState(
+userDetails: null == userDetails ? _self._userDetails : userDetails // ignore: cast_nullable_to_non_nullable
+as List<UserEntity>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,msg: null == msg ? _self.msg : msg // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 // dart format on
