@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:personal_info_manager/core/custom_widgets/custom_text.dart';
 
-class CustomFormTextField extends StatelessWidget {
+class LoginFormTextField extends StatelessWidget {
   final TextEditingController controller;
   final String? hintText;
 
@@ -13,7 +13,7 @@ class CustomFormTextField extends StatelessWidget {
   final VoidCallback? ontap;
   final String? Function(String?)? validator;
 
-  const CustomFormTextField({
+  const LoginFormTextField({
     super.key,
     required this.controller,
     required this.hintText,
@@ -29,11 +29,12 @@ class CustomFormTextField extends StatelessWidget {
     return SizedBox(
       width: widthSize,
       child: TextFormField(
+        
         validator:validator,
         readOnly: readonly ?? false,
         cursorColor: Colors.black,
         controller: controller,
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: Colors.black,fontSize: 12),
         decoration: InputDecoration(
           hintStyle: TextStyle(color: Colors.black),
           hintText: hintText,

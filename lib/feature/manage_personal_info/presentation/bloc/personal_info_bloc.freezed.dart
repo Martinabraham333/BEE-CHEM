@@ -55,11 +55,13 @@ extension PersonalInfoEventPatterns on PersonalInfoEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( FetchPersonalInfoList value)?  fetchPersonalInfoList,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( FetchPersonalInfoList value)?  fetchPersonalInfoList,TResult Function( SearchPersonalInfoList value)?  searchPersonalInfoList,TResult Function( FetchRoleDetails value)?  fetchRoleDetails,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case FetchPersonalInfoList() when fetchPersonalInfoList != null:
-return fetchPersonalInfoList(_that);case _:
+return fetchPersonalInfoList(_that);case SearchPersonalInfoList() when searchPersonalInfoList != null:
+return searchPersonalInfoList(_that);case FetchRoleDetails() when fetchRoleDetails != null:
+return fetchRoleDetails(_that);case _:
   return orElse();
 
 }
@@ -77,11 +79,13 @@ return fetchPersonalInfoList(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( FetchPersonalInfoList value)  fetchPersonalInfoList,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( FetchPersonalInfoList value)  fetchPersonalInfoList,required TResult Function( SearchPersonalInfoList value)  searchPersonalInfoList,required TResult Function( FetchRoleDetails value)  fetchRoleDetails,}){
 final _that = this;
 switch (_that) {
 case FetchPersonalInfoList():
-return fetchPersonalInfoList(_that);case _:
+return fetchPersonalInfoList(_that);case SearchPersonalInfoList():
+return searchPersonalInfoList(_that);case FetchRoleDetails():
+return fetchRoleDetails(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -98,11 +102,13 @@ return fetchPersonalInfoList(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( FetchPersonalInfoList value)?  fetchPersonalInfoList,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( FetchPersonalInfoList value)?  fetchPersonalInfoList,TResult? Function( SearchPersonalInfoList value)?  searchPersonalInfoList,TResult? Function( FetchRoleDetails value)?  fetchRoleDetails,}){
 final _that = this;
 switch (_that) {
 case FetchPersonalInfoList() when fetchPersonalInfoList != null:
-return fetchPersonalInfoList(_that);case _:
+return fetchPersonalInfoList(_that);case SearchPersonalInfoList() when searchPersonalInfoList != null:
+return searchPersonalInfoList(_that);case FetchRoleDetails() when fetchRoleDetails != null:
+return fetchRoleDetails(_that);case _:
   return null;
 
 }
@@ -119,10 +125,12 @@ return fetchPersonalInfoList(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  fetchPersonalInfoList,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  fetchPersonalInfoList,TResult Function( String query)?  searchPersonalInfoList,TResult Function()?  fetchRoleDetails,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case FetchPersonalInfoList() when fetchPersonalInfoList != null:
-return fetchPersonalInfoList();case _:
+return fetchPersonalInfoList();case SearchPersonalInfoList() when searchPersonalInfoList != null:
+return searchPersonalInfoList(_that.query);case FetchRoleDetails() when fetchRoleDetails != null:
+return fetchRoleDetails();case _:
   return orElse();
 
 }
@@ -140,10 +148,12 @@ return fetchPersonalInfoList();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  fetchPersonalInfoList,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  fetchPersonalInfoList,required TResult Function( String query)  searchPersonalInfoList,required TResult Function()  fetchRoleDetails,}) {final _that = this;
 switch (_that) {
 case FetchPersonalInfoList():
-return fetchPersonalInfoList();case _:
+return fetchPersonalInfoList();case SearchPersonalInfoList():
+return searchPersonalInfoList(_that.query);case FetchRoleDetails():
+return fetchRoleDetails();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -160,10 +170,12 @@ return fetchPersonalInfoList();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  fetchPersonalInfoList,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  fetchPersonalInfoList,TResult? Function( String query)?  searchPersonalInfoList,TResult? Function()?  fetchRoleDetails,}) {final _that = this;
 switch (_that) {
 case FetchPersonalInfoList() when fetchPersonalInfoList != null:
-return fetchPersonalInfoList();case _:
+return fetchPersonalInfoList();case SearchPersonalInfoList() when searchPersonalInfoList != null:
+return searchPersonalInfoList(_that.query);case FetchRoleDetails() when fetchRoleDetails != null:
+return fetchRoleDetails();case _:
   return null;
 
 }
@@ -204,9 +216,107 @@ String toString() {
 
 
 /// @nodoc
+
+
+class SearchPersonalInfoList implements PersonalInfoEvent {
+  const SearchPersonalInfoList(this.query);
+  
+
+ final  String query;
+
+/// Create a copy of PersonalInfoEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SearchPersonalInfoListCopyWith<SearchPersonalInfoList> get copyWith => _$SearchPersonalInfoListCopyWithImpl<SearchPersonalInfoList>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchPersonalInfoList&&(identical(other.query, query) || other.query == query));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,query);
+
+@override
+String toString() {
+  return 'PersonalInfoEvent.searchPersonalInfoList(query: $query)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SearchPersonalInfoListCopyWith<$Res> implements $PersonalInfoEventCopyWith<$Res> {
+  factory $SearchPersonalInfoListCopyWith(SearchPersonalInfoList value, $Res Function(SearchPersonalInfoList) _then) = _$SearchPersonalInfoListCopyWithImpl;
+@useResult
+$Res call({
+ String query
+});
+
+
+
+
+}
+/// @nodoc
+class _$SearchPersonalInfoListCopyWithImpl<$Res>
+    implements $SearchPersonalInfoListCopyWith<$Res> {
+  _$SearchPersonalInfoListCopyWithImpl(this._self, this._then);
+
+  final SearchPersonalInfoList _self;
+  final $Res Function(SearchPersonalInfoList) _then;
+
+/// Create a copy of PersonalInfoEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? query = null,}) {
+  return _then(SearchPersonalInfoList(
+null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class FetchRoleDetails implements PersonalInfoEvent {
+  const FetchRoleDetails();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FetchRoleDetails);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'PersonalInfoEvent.fetchRoleDetails()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
 mixin _$PersonalInfoState {
 
- List<PersonalInfoEntity> get personalDetails; bool get isLoading; String get msg;
+ List<PersonalInfoEntity> get personalDetails; List<RoleEntity> get roleDetails; bool get isLoading; String get msg;
 /// Create a copy of PersonalInfoState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -217,16 +327,16 @@ $PersonalInfoStateCopyWith<PersonalInfoState> get copyWith => _$PersonalInfoStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PersonalInfoState&&const DeepCollectionEquality().equals(other.personalDetails, personalDetails)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.msg, msg) || other.msg == msg));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PersonalInfoState&&const DeepCollectionEquality().equals(other.personalDetails, personalDetails)&&const DeepCollectionEquality().equals(other.roleDetails, roleDetails)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.msg, msg) || other.msg == msg));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(personalDetails),isLoading,msg);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(personalDetails),const DeepCollectionEquality().hash(roleDetails),isLoading,msg);
 
 @override
 String toString() {
-  return 'PersonalInfoState(personalDetails: $personalDetails, isLoading: $isLoading, msg: $msg)';
+  return 'PersonalInfoState(personalDetails: $personalDetails, roleDetails: $roleDetails, isLoading: $isLoading, msg: $msg)';
 }
 
 
@@ -237,7 +347,7 @@ abstract mixin class $PersonalInfoStateCopyWith<$Res>  {
   factory $PersonalInfoStateCopyWith(PersonalInfoState value, $Res Function(PersonalInfoState) _then) = _$PersonalInfoStateCopyWithImpl;
 @useResult
 $Res call({
- List<PersonalInfoEntity> personalDetails, bool isLoading, String msg
+ List<PersonalInfoEntity> personalDetails, List<RoleEntity> roleDetails, bool isLoading, String msg
 });
 
 
@@ -254,10 +364,11 @@ class _$PersonalInfoStateCopyWithImpl<$Res>
 
 /// Create a copy of PersonalInfoState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? personalDetails = null,Object? isLoading = null,Object? msg = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? personalDetails = null,Object? roleDetails = null,Object? isLoading = null,Object? msg = null,}) {
   return _then(_self.copyWith(
 personalDetails: null == personalDetails ? _self.personalDetails : personalDetails // ignore: cast_nullable_to_non_nullable
-as List<PersonalInfoEntity>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as List<PersonalInfoEntity>,roleDetails: null == roleDetails ? _self.roleDetails : roleDetails // ignore: cast_nullable_to_non_nullable
+as List<RoleEntity>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,msg: null == msg ? _self.msg : msg // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -344,10 +455,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<PersonalInfoEntity> personalDetails,  bool isLoading,  String msg)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<PersonalInfoEntity> personalDetails,  List<RoleEntity> roleDetails,  bool isLoading,  String msg)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PersonalInfoState() when $default != null:
-return $default(_that.personalDetails,_that.isLoading,_that.msg);case _:
+return $default(_that.personalDetails,_that.roleDetails,_that.isLoading,_that.msg);case _:
   return orElse();
 
 }
@@ -365,10 +476,10 @@ return $default(_that.personalDetails,_that.isLoading,_that.msg);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<PersonalInfoEntity> personalDetails,  bool isLoading,  String msg)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<PersonalInfoEntity> personalDetails,  List<RoleEntity> roleDetails,  bool isLoading,  String msg)  $default,) {final _that = this;
 switch (_that) {
 case _PersonalInfoState():
-return $default(_that.personalDetails,_that.isLoading,_that.msg);case _:
+return $default(_that.personalDetails,_that.roleDetails,_that.isLoading,_that.msg);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -385,10 +496,10 @@ return $default(_that.personalDetails,_that.isLoading,_that.msg);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<PersonalInfoEntity> personalDetails,  bool isLoading,  String msg)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<PersonalInfoEntity> personalDetails,  List<RoleEntity> roleDetails,  bool isLoading,  String msg)?  $default,) {final _that = this;
 switch (_that) {
 case _PersonalInfoState() when $default != null:
-return $default(_that.personalDetails,_that.isLoading,_that.msg);case _:
+return $default(_that.personalDetails,_that.roleDetails,_that.isLoading,_that.msg);case _:
   return null;
 
 }
@@ -400,7 +511,7 @@ return $default(_that.personalDetails,_that.isLoading,_that.msg);case _:
 
 
 class _PersonalInfoState implements PersonalInfoState {
-  const _PersonalInfoState({final  List<PersonalInfoEntity> personalDetails = const [], this.isLoading = false, this.msg = ''}): _personalDetails = personalDetails;
+  const _PersonalInfoState({final  List<PersonalInfoEntity> personalDetails = const [], final  List<RoleEntity> roleDetails = const [], this.isLoading = false, this.msg = ''}): _personalDetails = personalDetails,_roleDetails = roleDetails;
   
 
  final  List<PersonalInfoEntity> _personalDetails;
@@ -408,6 +519,13 @@ class _PersonalInfoState implements PersonalInfoState {
   if (_personalDetails is EqualUnmodifiableListView) return _personalDetails;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_personalDetails);
+}
+
+ final  List<RoleEntity> _roleDetails;
+@override@JsonKey() List<RoleEntity> get roleDetails {
+  if (_roleDetails is EqualUnmodifiableListView) return _roleDetails;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_roleDetails);
 }
 
 @override@JsonKey() final  bool isLoading;
@@ -423,16 +541,16 @@ _$PersonalInfoStateCopyWith<_PersonalInfoState> get copyWith => __$PersonalInfoS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PersonalInfoState&&const DeepCollectionEquality().equals(other._personalDetails, _personalDetails)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.msg, msg) || other.msg == msg));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PersonalInfoState&&const DeepCollectionEquality().equals(other._personalDetails, _personalDetails)&&const DeepCollectionEquality().equals(other._roleDetails, _roleDetails)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.msg, msg) || other.msg == msg));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_personalDetails),isLoading,msg);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_personalDetails),const DeepCollectionEquality().hash(_roleDetails),isLoading,msg);
 
 @override
 String toString() {
-  return 'PersonalInfoState(personalDetails: $personalDetails, isLoading: $isLoading, msg: $msg)';
+  return 'PersonalInfoState(personalDetails: $personalDetails, roleDetails: $roleDetails, isLoading: $isLoading, msg: $msg)';
 }
 
 
@@ -443,7 +561,7 @@ abstract mixin class _$PersonalInfoStateCopyWith<$Res> implements $PersonalInfoS
   factory _$PersonalInfoStateCopyWith(_PersonalInfoState value, $Res Function(_PersonalInfoState) _then) = __$PersonalInfoStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<PersonalInfoEntity> personalDetails, bool isLoading, String msg
+ List<PersonalInfoEntity> personalDetails, List<RoleEntity> roleDetails, bool isLoading, String msg
 });
 
 
@@ -460,10 +578,11 @@ class __$PersonalInfoStateCopyWithImpl<$Res>
 
 /// Create a copy of PersonalInfoState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? personalDetails = null,Object? isLoading = null,Object? msg = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? personalDetails = null,Object? roleDetails = null,Object? isLoading = null,Object? msg = null,}) {
   return _then(_PersonalInfoState(
 personalDetails: null == personalDetails ? _self._personalDetails : personalDetails // ignore: cast_nullable_to_non_nullable
-as List<PersonalInfoEntity>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as List<PersonalInfoEntity>,roleDetails: null == roleDetails ? _self._roleDetails : roleDetails // ignore: cast_nullable_to_non_nullable
+as List<RoleEntity>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,msg: null == msg ? _self.msg : msg // ignore: cast_nullable_to_non_nullable
 as String,
   ));

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_info_manager/core/app_colors.dart';
 import 'package:personal_info_manager/core/custom_widgets/custom_button.dart';
-import 'package:personal_info_manager/core/custom_widgets/custom_form_textfiled.dart';
+import 'package:personal_info_manager/core/custom_widgets/login_form_textfiled.dart';
 import 'package:personal_info_manager/core/custom_widgets/custom_text.dart';
-import 'package:personal_info_manager/core/custom_widgets/custom_textfield.dart';
+import 'package:personal_info_manager/core/custom_widgets/custom_search_textfield.dart';
 import 'package:personal_info_manager/core/media_query_values.dart';
 import 'package:personal_info_manager/feature/login/presentation/bloc/login_bloc.dart';
 import 'package:personal_info_manager/feature/manage_personal_info/presentation/screens/personal_info_list_screen.dart';
@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
               CustomText(
                 text: 'BEE CHEM',
                 fontWeight: FontWeight.bold,
-                fontSize: 40,
+                fontSize: 20,
               ),
             ],
           ),
@@ -120,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: CustomText(
             text: 'Welcome back!',
             fontWeight: FontWeight.bold,
-            fontSize: 50,
+            fontSize: 20,
           ),
         ),
         SizedBox(height: 10),
@@ -128,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: CustomText(
             text: 'Login To Your Account',
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: 14,
             color: Colors.grey,
           ),
         ),
@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomFormTextField(
+            LoginFormTextField(
               widthSize: width * 0.8,
               icon: Icons.email,
               controller: _emailController,
@@ -155,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
               },
             ),
             SizedBox(height: 20),
-            CustomFormTextField(
+            LoginFormTextField(
               widthSize: width * 0.8,
               icon: Icons.lock,
               controller: _passwordController,
@@ -169,39 +169,43 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 20),
 
             Center(
-              child: SizedBox(
-                width: width * 0.8,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: true,
-                          onChanged: (value) {},
-                          checkColor: Colors.white,
-                          activeColor: AppColors.primaryColor,
-                        ),
-                        CustomText(
-                          text: 'Remember Me',
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ],
-                    ),
-
-                    CustomText(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: true,
+                        onChanged: (value) {},
+                        checkColor: Colors.white,
+                        activeColor: AppColors.primaryColor,
+                      ),
+                      CustomText(
+                        fontSize: 12,
+                        text: 'Remember Me',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ],
+                  ),
+              
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: CustomText(
+                       fontSize: 12,
                       text: 'FORGOT PASSWORD?',
                       fontWeight: FontWeight.bold,
                       color: AppColors.primaryColor,
                     ),
-                  ],
-                ),
+                  ),
+               
+                ],
               ),
             ),
 
-            SizedBox(height: 20),
+            SizedBox(height: 10),
 
             CustomButton(
+              
               title: 'LOGIN',
               ontap: () {
                 print(_formKey.currentState!.validate());
@@ -218,7 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               width: width * 0.8,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
           ],
         ),
       ),
@@ -233,19 +237,20 @@ class _LoginScreenState extends State<LoginScreen> {
             text: 'OR',
             fontWeight: FontWeight.bold,
             color: Colors.grey,
-            fontSize: 20,
+            fontSize: 12,
           ),
         ),
 
-        SizedBox(height: 20),
+        SizedBox(height: 10),
         Center(
           child: CustomText(
             text: "Don't have an account? REGISTER",
             fontWeight: FontWeight.bold,
             color: Colors.black,
-            fontSize: 20,
+            fontSize: 12,
           ),
         ),
+         SizedBox(height: 10),
       ],
     );
   }
