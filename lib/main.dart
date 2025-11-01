@@ -9,6 +9,7 @@ import 'package:personal_info_manager/feature/login/presentation/screens/login_s
 import 'package:personal_info_manager/feature/manage_personal_info/presentation/bloc/personal_info_bloc.dart';
 
 void main() {
+    WidgetsFlutterBinding.ensureInitialized();
   di.iniDependency();
 
   runApp(

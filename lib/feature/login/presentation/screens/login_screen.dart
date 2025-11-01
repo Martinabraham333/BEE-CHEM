@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_info_manager/core/app_colors.dart';
@@ -10,6 +11,7 @@ import 'package:personal_info_manager/core/custom_widgets/custom_search_textfiel
 import 'package:personal_info_manager/core/media_query_values.dart';
 import 'package:personal_info_manager/feature/login/presentation/bloc/login_bloc.dart';
 import 'package:personal_info_manager/feature/manage_personal_info/presentation/screens/personal_info_list_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -22,12 +24,41 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool rememberMe = true;
+  bool rememberMe = false;
   @override
   void initState() {
-    _emailController.text = 'nanesh.g3interactive@gmail.com';
-    _passwordController.text = '12345678';
+    // _emailController.text = 'nanesh.g3interactive@gmail.com';
+    // _passwordController.text = '12345678';
+    _loadSavedCredentials();
     super.initState();
+  }
+
+  Future<void> _loadSavedCredentials() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedEmail = prefs.getString('email');
+    final savedPassword = prefs.getString('password');
+    final savedRemember = prefs.getBool('rememberMe') ?? false;
+
+    if (savedRemember && savedEmail != null && savedPassword != null) {
+      setState(() {
+        rememberMe = true;
+        _emailController.text = savedEmail;
+        _passwordController.text = savedPassword;
+      });
+    }
+  }
+
+  Future<void> _handleRememberMe() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (rememberMe) {
+      await prefs.setString('email', _emailController.text);
+      await prefs.setString('password', _passwordController.text);
+      await prefs.setBool('rememberMe', true);
+    } else {
+      await prefs.remove('email');
+      await prefs.remove('password');
+      await prefs.setBool('rememberMe', false);
+    }
   }
 
   @override
@@ -46,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
               },
             ),
           );
-
+          _handleRememberMe();
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Login Successful!'),
@@ -58,25 +89,31 @@ class _LoginScreenState extends State<LoginScreen> {
       child: SafeArea(
         child: BlocBuilder<LoginBloc, LoginState>(
           builder: (context, state) {
-            return state.isLoading==true ? Scaffold(
-              body: Center(child: CircularProgressIndicator(color:AppColors.primaryColor,),),
-            )  : Scaffold(
-              body: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _headerSection(height, width),
-                    SizedBox(height: 30),
-                    _welcomeSection(),
-                    SizedBox(height: 40),
-                    _formSection(height, width),
-                    SizedBox(height: 20),
-                    _footerSection(),
-                  ],
-                ),
-              ),
-            );
+            return state.isLoading == true
+                ? Scaffold(
+                    body: Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                  )
+                : Scaffold(
+                    body: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _headerSection(height, width),
+                          SizedBox(height: 30),
+                          _welcomeSection(),
+                          SizedBox(height: 40),
+                          _formSection(height, width),
+                          SizedBox(height: 20),
+                          _footerSection(),
+                        ],
+                      ),
+                    ),
+                  );
           },
         ),
       ),
@@ -175,8 +212,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     children: [
                       Checkbox(
-                        value: true,
-                        onChanged: (value) {},
+                        value: rememberMe,
+                        onChanged: (value) {
+                          print(value);
+                          setState(() {
+                            rememberMe = value ?? false;
+                          });
+                        },
                         checkColor: Colors.white,
                         activeColor: AppColors.primaryColor,
                       ),
@@ -187,17 +229,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-              
+
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: CustomText(
-                       fontSize: 12,
+                      fontSize: 12,
                       text: 'FORGOT PASSWORD?',
                       fontWeight: FontWeight.bold,
                       color: AppColors.primaryColor,
                     ),
                   ),
-               
                 ],
               ),
             ),
@@ -205,7 +246,6 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 10),
 
             CustomButton(
-              
               title: 'LOGIN',
               ontap: () {
                 print(_formKey.currentState!.validate());
@@ -243,14 +283,28 @@ class _LoginScreenState extends State<LoginScreen> {
 
         SizedBox(height: 10),
         Center(
-          child: CustomText(
-            text: "Don't have an account? REGISTER",
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            fontSize: 12,
-          ),
+          child: RichText(
+      text: TextSpan(
+        text: "Don't have an account? ",
+        style: const TextStyle(
+          color: Colors.black87,
+          fontSize: 14,
         ),
-         SizedBox(height: 10),
+        children: [
+          TextSpan(
+            text: "REGISTER",
+            style: const TextStyle(
+              color:AppColors.primaryColor,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline,
+            ),
+            recognizer: TapGestureRecognizer()..onTap = (){},
+          ),
+        ],
+      ),
+    )
+        ),
+        SizedBox(height: 10),
       ],
     );
   }

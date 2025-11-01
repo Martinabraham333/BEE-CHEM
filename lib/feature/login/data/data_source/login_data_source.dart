@@ -10,7 +10,7 @@ class LoginDataSource {
   LoginDataSource(this.client);
 
   Future<UserModel> login(String username, String password) async {
-    final response = await client.post('login', {
+    final response = await client.loginPost('login', {
       "email": username,
       "password": password,
       "mob_user": "1",

@@ -4,4 +4,5 @@ import 'package:personal_info_manager/feature/manage_personal_info/domain/entiti
 abstract  class PersonalInfoRepository {
   Future<List<PersonalInfoEntity>>fetchPersonalInfo();
   Future<List<RoleEntity>>fetchRoleDetails();
+  Future<bool>saveDetails(Map<String,dynamic> saveData);
 }

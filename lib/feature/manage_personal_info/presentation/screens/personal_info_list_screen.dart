@@ -7,6 +7,7 @@ import 'package:personal_info_manager/core/media_query_values.dart';
 import 'package:personal_info_manager/feature/manage_personal_info/domain/entities/personal_info_entity.dart';
 import 'package:personal_info_manager/feature/manage_personal_info/presentation/bloc/personal_info_bloc.dart';
 import 'package:personal_info_manager/feature/manage_personal_info/presentation/screens/add_personal_info_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PersonalInfoListScreen extends StatefulWidget {
   const PersonalInfoListScreen({super.key});
@@ -34,14 +35,31 @@ class _PersonalInfoListScreenState extends State<PersonalInfoListScreen> {
     return BlocConsumer<PersonalInfoBloc, PersonalInfoState>(
       listener: (context, state) {},
       builder: (context, state) {
-        return SafeArea(
+        return state.isLoading == true
+                ? Scaffold(
+                    body: Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                  )
+                : SafeArea(
           child: Scaffold(
-            floatingActionButton:FloatingActionButton(
-                  onPressed: (){
-Navigator.push(context, MaterialPageRoute(builder: (context){
-return AddPersonalInfoScreen();
-}));
-                  },child: Icon(Icons.add),backgroundColor: AppColors.primaryColor,shape: CircleBorder(),) ,
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return AddPersonalInfoScreen();
+                    },
+                  ),
+                );
+              },
+              child: Icon(Icons.add),
+              backgroundColor: AppColors.primaryColor,
+              shape: CircleBorder(),
+            ),
             body: Column(
               children: [
                 _headerSection(width, height),
@@ -49,8 +67,6 @@ return AddPersonalInfoScreen();
                 _searchSection(width, height),
                 SizedBox(height: 20),
                 _listSection(width, height, state.personalDetails),
-
-                
               ],
             ),
           ),
@@ -226,7 +242,11 @@ return AddPersonalInfoScreen();
           padding: const EdgeInsets.only(right: 20),
           child: GestureDetector(
             onTap: () {
-              context.read<PersonalInfoBloc>().add(PersonalInfoEvent.searchPersonalInfoList(_serachController.text));
+              context.read<PersonalInfoBloc>().add(
+                PersonalInfoEvent.searchPersonalInfoList(
+                  _serachController.text,
+                ),
+              );
             },
             child: CircleAvatar(
               backgroundColor: AppColors.primaryColor,
@@ -252,7 +272,14 @@ return AddPersonalInfoScreen();
           padding: const EdgeInsets.all(20),
           child: Align(
             alignment: Alignment.topRight,
-            child: Icon(Icons.logout, size: 20),
+            child: GestureDetector(
+              onTap: () async {
+                final prefs = await SharedPreferences.getInstance();
+                prefs.clear();
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.logout, size: 20),
+            ),
           ),
         ),
         Padding(

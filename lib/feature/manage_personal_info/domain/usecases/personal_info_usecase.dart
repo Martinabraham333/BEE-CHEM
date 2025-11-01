@@ -21,4 +21,12 @@ class PersonalInfoUsecase {
      throw Exception('Error while fetching role details');
   }
   }
+  Future <bool> saveDetails(Map<String,dynamic> saveData)async{
+  try {
+     return await repository.saveDetails(saveData);
+  } catch (e) {
+    print(e);
+     throw Exception('Error while saving details');
+  }
+  }
 }

@@ -6,6 +6,7 @@ abstract class  PersonalInfoState with _$PersonalInfoState {
   @Default([]) List<PersonalInfoEntity>  personalDetails,
   @Default([]) List<RoleEntity>  roleDetails,
   @Default(false) bool  isLoading,
+  @Default([]) List<Map<String,dynamic>>  isRoleCheck,
   @Default('') String  msg,
 
   }) = _PersonalInfoState;

@@ -6,7 +6,10 @@ import 'package:personal_info_manager/core/app_strings.dart';
 class ApiClient {
   final String baseUrl = 'https://beechem.ishtech.live/api/';
 
-  Future<http.Response> post(String endPoint, Map<String, dynamic> data) async {
+  Future<http.Response> loginPost(
+    String endPoint,
+    Map<String, dynamic> data,
+  ) async {
     final url = Uri.parse(baseUrl + endPoint);
     log("POST: $url");
 
@@ -18,7 +21,34 @@ class ApiClient {
       );
       return response;
     } catch (e) {
-      return http.Response(jsonEncode({'error': 'Unexpected error occurred'}),500);
+      return http.Response(
+        jsonEncode({'error': 'Unexpected error occurred'}),
+        500,
+      );
+    }
+  }
+
+  Future<http.Response> post(String endPoint, Map<String, dynamic> data) async {
+    final url = Uri.parse(baseUrl + endPoint);
+
+    final personaldetails = jsonEncode(data);
+    log("POST: $url");
+    log("POST body: $personaldetails");
+
+    try {
+      final response = await http.post(
+        url,
+        body: personaldetails,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${AppStrings.tocken}',
+        },
+      );
+      print(response.body);
+      return response;
+    } catch (e) {
+      return http.Response(jsonEncode({e}), 500);
     }
   }
 
@@ -37,7 +67,10 @@ class ApiClient {
       return response;
     } catch (e) {
       log("❌ GET Error: $e");
-       return http.Response(jsonEncode({'error': 'Unexpected error occurred'}),500);
+      return http.Response(
+        jsonEncode({'error': 'Unexpected error occurred'}),
+        500,
+      );
     }
   }
 }

@@ -43,6 +43,8 @@ dependencies:
   rename: ^3.1.0
   http: ^1.5.0
   get_it: ^8.2.0
+  quickalert: ^1.1.0
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:

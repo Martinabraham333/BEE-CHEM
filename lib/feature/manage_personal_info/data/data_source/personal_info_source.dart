@@ -49,4 +49,20 @@ class PersonalInfoSource {
       throw Exception("Failed to fetch role details: ${response.statusCode}");
     }
   }
+
+  Future<bool> saveDeatils(Map<String,dynamic> saveData) async {
+   try {
+      final response = await client.post('personnel-details/add',saveData);
+    log('SAVE DETAILS');
+    log(response.statusCode.toString());
+    log(response.body.toString());
+    if (response.statusCode == 200) {
+     return true;
+    } else {
+      throw Exception("Failed to save details");
+    }
+   } catch (e) {
+     throw Exception("Failed to save details");
+   }
+  }
 }

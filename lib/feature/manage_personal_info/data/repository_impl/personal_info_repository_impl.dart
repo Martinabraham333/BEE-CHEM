@@ -8,24 +8,36 @@ class PersonalInfoRepositoryImpl extends PersonalInfoRepository {
   PersonalInfoRepositoryImpl(this.dataSource);
   @override
   Future<List<PersonalInfoEntity>> fetchPersonalInfo() async {
-   try {
-      final List<PersonalInfoEntity> data = await dataSource.fetchPersonalInfo();
+    try {
+      final List<PersonalInfoEntity> data = await dataSource
+          .fetchPersonalInfo();
 
-    return data;
-   } catch (e) {
-     throw Exception('Error while fetching personnal details');
-   }
+      return data;
+    } catch (e) {
+      throw Exception('Error while fetching personnal details');
+    }
   }
-  
+
   @override
-  Future<List<RoleEntity>> fetchRoleDetails() async{
-   try {
+  Future<List<RoleEntity>> fetchRoleDetails() async {
+    try {
       final List<RoleEntity> data = await dataSource.fetchRoles();
 
-    return data;
-   } catch (e) {
-    print(e);
-     throw Exception(e);
-   }
+      return data;
+    } catch (e) {
+      print(e);
+      throw Exception(e);
+    }
+  }
+
+  @override
+  Future<bool> saveDetails(Map<String, dynamic> saveData) async {
+    try {
+      final result = await dataSource.saveDeatils(saveData);
+      return result;
+    } catch (e) {
+       print(e);
+      throw Exception(e);
+    }
   }
 }

@@ -7,6 +7,7 @@ class CustomFormTextfield extends StatelessWidget {
   final TextEditingController controller;
   final String? hintText;
   final String? title;
+  final int? maxLines;
 
   final IconData? icon;
   final double widthSize;
@@ -23,7 +24,7 @@ class CustomFormTextfield extends StatelessWidget {
     this.widthSize = double.infinity,
     this.icon,
     this.readonly,
-    this.ontap, required this.validator,
+    this.ontap, required this.validator, this.maxLines,
   });
 
   @override
@@ -37,7 +38,7 @@ class CustomFormTextfield extends StatelessWidget {
         SizedBox(
           width: widthSize,
           child: TextFormField(
-            
+            maxLines: maxLines,
             validator:validator,
             readOnly: readonly ?? false,
             cursorColor: Colors.black,
@@ -60,6 +61,17 @@ class CustomFormTextfield extends StatelessWidget {
                 borderSide: BorderSide(color:Colors.black),
                 borderRadius: BorderRadius.circular(20),
               ),
+
+               errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: Colors.red, width: 1.5),
+        ),
+
+
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: Colors.red, width: 1.5),
+        ),
             ),
           ),
         ),
